@@ -6,6 +6,7 @@ from settings import Settings
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from star import Star
 
 class AllienInvasion:
     """Overall class to manage game assets and behaviour"""
@@ -22,8 +23,10 @@ class AllienInvasion:
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
+        self.stars = pygame.sprite.Group()
 
         self._create_fleet()
+        self._create_stars()
 
     def run_game(self):
         """Star the main loop for the game"""
@@ -106,6 +109,12 @@ class AllienInvasion:
         alien.rect.y = alien.rect.height + 2* alien.rect.height*row_number
         self.aliens.add(alien)
 
+    def _create_stars(self):
+        """Create a star and place it on the scree"""
+        # Make a star.
+        star = Star(self)
+        self.stars.add(star)
+
     def _update_screen(self):
         """Update images on the screen, and flip to the new scree"""
         self.screen.fill(self.settings.bg_color)
@@ -113,6 +122,7 @@ class AllienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+        self.stars.draw(self.screen)
 
         pygame.display.flip()
 
