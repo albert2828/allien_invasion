@@ -14,9 +14,11 @@ class Star(Sprite):
         self.image = pygame.image.load('images/star.bmp')
         self.rect = self.image.get_rect()
 
-        # Start each new star at the top left of the screen
-        self.rect.x = self.rect.width
-        self.rect.y = self.rect.height
+        # Start each new star at a random position on  the screen
+        star_x = randint(0,1200)
+        star_y = randint(0,700)
+        self.rect.x = star_x
+        self.rect.y = star_y
 
         # Store the star's exact horizontal position
         self.x = self.rect.x

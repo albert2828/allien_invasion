@@ -111,9 +111,10 @@ class AllienInvasion:
 
     def _create_stars(self):
         """Create a star and place it on the scree"""
-        # Make a star.
-        star = Star(self)
-        self.stars.add(star)
+        # Make several starts.
+        for i in range(10):
+            star = Star(self)
+            self.stars.add(star)
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new scree"""
@@ -121,8 +122,8 @@ class AllienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
-        self.aliens.draw(self.screen)
         self.stars.draw(self.screen)
+        self.aliens.draw(self.screen)
 
         pygame.display.flip()
 
