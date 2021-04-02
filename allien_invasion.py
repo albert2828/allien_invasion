@@ -82,7 +82,11 @@ class AllienInvasion:
                 self.bullets.remove(bullet)
 
     def _update_aliens(self):
-        """Update the possition of all aliens in the fleet"""
+        """
+        Check if the fleet is at and edge,
+         then update the position of all aliens in the fleet.
+        """
+        self._check_fleet_edges()
         self.aliens.update()
 
     def _create_fleet(self):
@@ -117,13 +121,14 @@ class AllienInvasion:
     def _check_fleet_edges(self):
         """Respond appropriatle if any aliens have reached the edge."""
         for alien in self.aliens.sprites():
-            self._change_fleet_direction()
-            break
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
 
     def _change_fleet_direction(self):
         """Drop the entire fleet and change the fleet's direction."""
         for alien in self.aliens.sprites():
-            alien.rect.y += self.settings.fleet_drop_speed
+            alien.rect.y += self.settings.alien_drop_speed
         self.settings.flee_direction *= -1
 
     def _create_stars(self):
