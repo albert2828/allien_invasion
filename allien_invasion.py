@@ -9,6 +9,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from star import Star
+from button import Button
 
 class AllienInvasion:
     """Overall class to manage game assets and behaviour"""
@@ -32,6 +33,9 @@ class AllienInvasion:
 
         self._create_fleet()
         self._create_stars()
+
+        # Maje the Play Button.
+        self.play_button = Button(self, "Play")
 
     def run_game(self):
         """Star the main loop for the game"""
@@ -202,6 +206,10 @@ class AllienInvasion:
             bullet.draw_bullet()
         self.stars.draw(self.screen)
         self.aliens.draw(self.screen)
+
+        # Draw the play buttom if the game is inactive.
+        if not self.stats.game_active:
+            self.play_button.draw_button()
 
         pygame.display.flip()
 
